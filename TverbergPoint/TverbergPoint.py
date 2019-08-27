@@ -1,6 +1,6 @@
 from centerpoint.utils.GeoUtils import *
 from shapely.geometry import Polygon
-
+from copy import deepcopy
 
 class TverbergPoint:
     """
@@ -35,13 +35,14 @@ class TverbergPoint:
         return Point(tverp_x, tverp_y)
 
     def getSafePoint(self, point_set):
-        self.point_set = point_set
         Tverp = []
         for d in range(0, 3):
+            self.point_set = deepcopy(point_set)
             l = Line(0.1 * d, 0)
             p_trans = [point_transfer(p, 0, 0, l) for p in self.point_set]
             tverp_trans = self.getTvbPoint(p_trans)
-            Tverp.append(point_transfer_back(tverp_trans, 0, 0, l))
+            tverp_trans_back = point_transfer_back(tverp_trans, 0, 0, l)
+            Tverp.append(tverp_trans_back)
         safe_point = Polygon([[p.x,p.y] for p in Tverp]).centroid
         return safe_point
 

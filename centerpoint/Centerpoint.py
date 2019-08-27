@@ -7,14 +7,19 @@ from centerpoint.utils.utils import *
 
 
 class Centerpoint:
-    def __init__(self, point_set, plot=False):
-        self.point_set = point_set
-        self.n = len(point_set)
+    def __init__(self, point_set=None, plot=False):
+        if point_set == None:
+            self.point_set = []
+        else:
+            self.point_set = point_set
+        self.n = len(self.point_set)
         self.np = math.ceil(self.n / 3)
         self.mp = math.ceil(self.n / 3) - math.ceil(self.n / 4)
-
-        self.x_min, self.x_max = find_x_bounds(self.point_set)
-        self.y_min, self.y_max = find_y_bounds(self.point_set)
+        try:
+            self.x_min, self.x_max = find_x_bounds(self.point_set)
+            self.y_min, self.y_max = find_y_bounds(self.point_set)
+        except:
+            pass
 
         self.points_in_L = None
         self.points_not_in_L = None
@@ -39,13 +44,26 @@ class Centerpoint:
 
         self.plot = plot
 
-    def reduce_then_get_centerpoint(self):
+    def getSafeCenterPoint(self, point_set):
+        cp = []
+        for d in range(0, 3):
+            self.point_set = deepcopy(point_set)
+            l = Line(0.1 * d, 0)
+            p_trans = [point_transfer(p, 0, 0, l) for p in self.point_set]
+            cp_trans = self.reduce_then_get_centerpoint(p_trans)
+            cp_trans_back = point_transfer_back(cp_trans, 0, 0, l)
+            cp.append(cp_trans_back)
+        safe_point = Polygon([[p.x, p.y] for p in cp]).centroid
+        return safe_point
+
+    def reduce_then_get_centerpoint(self,point_set):
+        self.point_set = point_set
         last_point_num = len(self.point_set)
         cur_point_num = 0
         #print("point number: %d" % last_point_num)
         while cur_point_num < last_point_num:
             last_point_num = len(self.point_set)
-            self.__init__(self.point_set, plot=self.plot)
+            self.__init__(point_set, plot=self.plot)
             try:
                 self.find_L_boundary()
                 self.find_U_boundary()
@@ -68,8 +86,8 @@ class Centerpoint:
         tvp = Tverp.getTvbPoint(self.point_set)
         centerpoints.append(tvp)
 
-        for cp in centerpoints:
-            print("Centerpoints: %.2f, %.2f" % (cp.x, cp.y))
+        #for cp in centerpoints:
+        #   print("Centerpoints: %.2f, %.2f" % (cp.x, cp.y))
         if self.plot:
             plt.clf()
             x_min, x_max = find_x_bounds(self.point_set)

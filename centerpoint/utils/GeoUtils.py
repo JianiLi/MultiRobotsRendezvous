@@ -156,8 +156,8 @@ def test_point_transfer():
     if point transfer and transfer back functions are correct,
     the black and red points should overlap.
     '''
-    k = -2
-    b = -2
+    k = 0.1
+    b = 0
     l = Line(k, b)
     x0 = 2
     y0 = k * x0 + b
