@@ -20,13 +20,13 @@ def plotResult(point_set, cp):
 
 
 if __name__ == '__main__':
-    n = 10  # total number of points
+    n = 1000  # total number of points
     plot = False
     start_time = time.time()
     point_set = random_point_set(n, lower=-100, upper=100)
     cp = Centerpoint(plot=plot)
-    #centerpoint = cp.reduce_then_get_centerpoint(point_set)
-    centerpoint = cp.getSafeCenterPoint(point_set)
+    centerpoint = cp.reduce_then_get_centerpoint(point_set)
+    #centerpoint = cp.getSafeCenterPoint(point_set)
     print("Centerpoints: %.2f, %.2f" % (centerpoint.x, centerpoint.y))
     print("Total time used for %d points is: %.2f s" % (n, time.time() - start_time))
 

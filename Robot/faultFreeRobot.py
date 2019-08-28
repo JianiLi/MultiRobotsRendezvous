@@ -1,5 +1,5 @@
 from centerpoint.Centerpoint import *
-
+from TverbergPoint.TverbergPoint import *
 
 class FaultFreeRobot:
     def __init__(self, pos, sensDist, alpha, velMax, delta):
