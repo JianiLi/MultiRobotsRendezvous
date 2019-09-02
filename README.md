@@ -26,7 +26,7 @@ pip install shapely
 ```
 
 ## Comparison cases
----
+
 ### faultTolerantRendezvous.py
 ```
 - 100 robots (fully connected graph)
