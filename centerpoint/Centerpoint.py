@@ -55,11 +55,11 @@ class Centerpoint:
                 contain = l.contains(p)
                 oneLine = oneLine and contain
         if oneLine:
-            point_set = [Point(p.x+0.001*random.random(), p.y+0.001*random.random()) for p in point_set]
+            point_set = [Point(p.x+0.0001*random.random(), p.y+0.0001*random.random()) for p in point_set]
 
         for d in range(0, 3):
             self.point_set = deepcopy(point_set)
-            l = Line(0.1 * d, 0)
+            l = Line(0.1 * (d+1), 0)
             p_trans = [point_transfer(p, 0, 0, l) for p in self.point_set]
             cp_trans = self.reduce_then_get_centerpoint(p_trans)
             cp_trans_back = point_transfer_back(cp_trans, 0, 0, l)
