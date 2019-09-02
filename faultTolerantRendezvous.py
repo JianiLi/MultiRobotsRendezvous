@@ -7,12 +7,12 @@ from TverbergPoint.TverbergPoint import *
 random.seed(1)
 
 n = 100  # number of robots
-n_faulty = 33  # number of faulty robots
+n_faulty = 30  # number of faulty robots
 n_fault_free = n - n_faulty  # number of fault-free robots
 
 box = 1  # box size
 
-method = "center"  # "tver" for Tverberg point or "center" for centerpoint
+method = "tver"  # "tver" for Tverberg point or "center" for centerpoint
 
 p = random_point_set(n, lower=-box, upper=box)  # robot coordinates
 p_fault_free = p[:n_fault_free]  # fault-free robot coordinates
@@ -67,7 +67,7 @@ while True:
     plot_point_set(p_fault_free, color='b')  # fault-free robots are plotted in blue
     plot_point_set(p_faulty, color='r')  # faulty robots are plotted in red
     plt.pause(1)
-    plt.savefig('./figure/faultTolerantRendezvous/%s%d.eps' % (method, t))
+    plt.savefig('./figure/faultTolerantRendezvous/%s%d.jpg' % (method, t))
     # end = input('Press enter to end the program.')
     t += 1
 

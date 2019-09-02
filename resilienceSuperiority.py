@@ -7,7 +7,7 @@ from TverbergPoint.TverbergPoint import *
 random.seed(1)
 
 n = 26  # number of robots
-n_faulty = 10  # number of faulty robots
+n_faulty = 12  # number of faulty robots
 
 n_fault_free = n - n_faulty  # number of fault-free robots
 
@@ -81,7 +81,7 @@ while True:
     plot_point_set(p_fault_free, color='b')  # fault-free robots are plotted in blue
     plot_point_set(p_faulty, color='r')  # faulty robots are plotted in red
     plt.pause(1)
-    plt.savefig('./figure/resilienceSuperiority/%s%d.eps' % (method, t))
+    plt.savefig('./figure/resilienceSuperiority/%s%d.jpg' % (method, t))
     #end = input('Press enter to end the program.')
     t += 1
 
