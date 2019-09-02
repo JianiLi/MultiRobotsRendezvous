@@ -26,7 +26,7 @@ pip install shapely
 ```
 
 ## Comparison cases
-
+---
 ### faultTolerantRendezvous.py
 ```
 - 100 robots (fully connected graph)
@@ -34,17 +34,19 @@ pip install shapely
 - fault-free robots should achieve consensus for both Tverberg point based and centerpoint based algorithms.
 ```
 
-#### Figure: Tverberg point based fault-tolerant rendezvous
+#### Tverberg point based fault-tolerant rendezvous
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/tver0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/tver2.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/tver5.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/tver10.jpg)
 
-#### Figure: centerpoint based fault-tolerant rendezvous
+#### Centerpoint based fault-tolerant rendezvous
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/center0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/center2.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/center5.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/faultTolerantRendezvous/center10.jpg)
+
+---
 
 ### attackToOnePoint.py
 ```
@@ -54,17 +56,19 @@ pip install shapely
 - Showing centerpoint is more resilient to Tverberg point.
 ```
 
-#### Figure: Tverberg point based rendezvous attacked to one point
+#### Tverberg point based rendezvous attacked to one point
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/tver0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/tver4.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/tver9.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/tver15.jpg)
 
-#### Figure: centerpoint based rendezvous attacked to one point
+#### Centerpoint based rendezvous attacked to one point
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/center0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/center4.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/center9.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/attackToOnePoint/center15.jpg)
+
+---
 
 ### resilienceSuperiority.py
 ```
@@ -74,12 +78,12 @@ pip install shapely
 - However, for centerpoint based rendezvoous, fault-free robots converge to one point. Because when n = 20, centerpoint is resilient to math.ceil(20/3) - 1 = 6 faulty robots.
 ```
 
-#### Figure: Tverberg point based rendezvous not resilient
-![-w20](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/tver0.jpg)
+#### Tverberg point based rendezvous not resilient
+![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/tver0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/tver5.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/tver9.jpg)
 
-#### Figure: centerpoint based rendezvous resilient to more faulty points
+#### Centerpoint based rendezvous resilient to more faulty points
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center7.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center13.jpg)
