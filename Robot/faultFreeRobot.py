@@ -1,5 +1,6 @@
-from centerpoint.Centerpoint import *
 from TverbergPoint.TverbergPoint import *
+from centerpoint.Centerpoint import *
+
 
 class FaultFreeRobot:
     def __init__(self, pos, sensDist, alpha, velMax, delta):
@@ -12,6 +13,7 @@ class FaultFreeRobot:
         self.stop = False
 
     def updatePos(self, points, method="tver"):
+        self.stop = False
         self.findNeighbors(points)
         self.getNextMove(method=method)
 
@@ -36,6 +38,7 @@ class FaultFreeRobot:
 
     def getCenterSafePoint(self):
         centerPoint = Centerpoint()
+        #cp = centerPoint.reduce_then_get_centerpoint(self.neighbors)
         cp = centerPoint.getSafeCenterPoint(self.neighbors)
         return cp
 

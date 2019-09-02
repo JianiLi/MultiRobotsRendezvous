@@ -42,6 +42,21 @@ class Centerpoint:
 
     def getSafeCenterPoint(self, point_set):
         cp = []
+
+        # determine if points are in the same line, if so, add small noise
+        # point_set = set([(p.x, p.y) for p in self.point_set])
+        self.point_set = deepcopy(point_set)
+        leftmost = Point(min(self.point_set, key=lambda P: P.x).x, min(self.point_set, key=lambda P: P.x).y)
+        rightmost = Point(max(self.point_set, key=lambda P: P.x).x, max(self.point_set, key=lambda P: P.x).y)
+        l = LineString([leftmost, rightmost])
+        oneLine = True
+        for p in self.point_set:
+            if p not in [leftmost, rightmost]:
+                contain = l.contains(p)
+                oneLine = oneLine and contain
+        if oneLine:
+            point_set = [Point(p.x+0.001*random.random(), p.y+0.001*random.random()) for p in point_set]
+
         for d in range(0, 3):
             self.point_set = deepcopy(point_set)
             l = Line(0.1 * d, 0)

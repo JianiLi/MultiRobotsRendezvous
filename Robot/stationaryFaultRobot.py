@@ -5,7 +5,7 @@ from centerpoint.Centerpoint import *
 
 class StationaryFaultyRobot:
     def __init__(self, pos):
-        self.pos = pos
+        self._pos = pos
 
     def getPos(self):
-        return self.pos
+        return self._pos

@@ -27,7 +27,7 @@ class TverbergPoint:
                 y_values.append(self.point_set[tver_pairs[i]].y)
             else:
                 if point_set[tver_pairs[i][0]].x == self.point_set[tver_pairs[i][1]].x:
-                    y_values.append(np.mean(self.point_set[tver_pairs[i][0]].y, self.point_set[tver_pairs[i][1]].y))
+                    y_values.append(np.mean([self.point_set[tver_pairs[i][0]].y, self.point_set[tver_pairs[i][1]].y]))
                 else:
                     l = line_over_two_points(self.point_set[tver_pairs[i][0]], self.point_set[tver_pairs[i][1]])
                     y_values.append(l.m * tverp_x + l.b)
