@@ -3,7 +3,7 @@ from centerpoint.Centerpoint import *
 
 
 class FaultFreeRobot:
-    def __init__(self, pos, sensDist, alpha, velMax, delta):
+    def __init__(self, pos, sensDist, alpha, velMax, delta, fixNeighbors=False):
         self.neighbors = []
         self._pos = pos
         self.sensDist = sensDist
@@ -11,10 +11,14 @@ class FaultFreeRobot:
         self.velMax = velMax
         self.delta = delta
         self.stop = False
+        self.fixNeighbors = fixNeighbors
+        self.neighborsPos = []
 
     def updatePos(self, points, method="tver"):
         self.stop = False
-        self.findNeighbors(points)
+        if self.neighbors == [] or not self.fixNeighbors:
+            self.findNeighbors(points)
+        self.neighborsPos = [points[i] for i in self.neighbors]
         self.getNextMove(method=method)
 
     def getPos(self):
@@ -25,28 +29,38 @@ class FaultFreeRobot:
 
     def findNeighbors(self, points):
         self.neighbors = []
-        for p in points:
+        for i in range(len(points)):
+            p = points[i]
             d = math.sqrt((self._pos.x - p.x) ** 2 + (self._pos.y - p.y) ** 2)
             if d <= self.sensDist:
-                self.neighbors.append(p)
+                self.neighbors.append(i)
+        self.neighborsPos = [points[i] for i in self.neighbors]
 
     def getTvbSafePoint(self):
         Tverp = TverbergPoint()
-        tvp = Tverp.getTvbPoint(self.neighbors)
-        sp = Tverp.getSafePoint(self.neighbors)
+        tvp = Tverp.getTvbPoint(self.neighborsPos)
+        sp = Tverp.getSafePoint(self.neighborsPos)
         return sp
 
     def getCenterSafePoint(self):
         centerPoint = Centerpoint()
-        #cp = centerPoint.reduce_then_get_centerpoint(self.neighbors)
-        cp = centerPoint.getSafeCenterPoint(self.neighbors)
+        #cp = centerPoint.reduce_then_get_centerpoint(self.neighborsPos)
+        cp = centerPoint.getSafeCenterPoint(self.neighborsPos)
         return cp
+
+    def getMedian(self):
+        median_x = np.median([p.x for p in self.neighborsPos])
+        median_y = np.median([p.y for p in self.neighborsPos])
+        return Point(median_x, median_y)
+
 
     def getNextMove(self, method):
         if method == "tver":
             sp = self.getTvbSafePoint()
         elif method == "center":
             sp = self.getCenterSafePoint()
+        elif method == "median":
+            sp = self.getMedian()
         else:
             raise Exception("No such method, please enter either 'tver' or 'center'.")
 

@@ -63,7 +63,7 @@ def plot_line(L, linestyle='--', color='b'):
     plt.draw()
 
 
-def plot_vertical_line(x, linestyle=':', color='g', linewidth=2):
+def plot_vertical_line(x, linestyle=':', color='g', linewidth=5):
     plt.axvline(x=x, ls=linestyle, color=color, linewidth=linewidth)
 
 
@@ -71,8 +71,8 @@ def plot_line_segment(L, linestyle='-', color='b'):
     plt.plot([L.p1.x, L.p2.x], [L.p1.y, L.p2.y], ls=linestyle, color=color, linewidth=4)
 
 
-def plot_point(P, marker='o', color='b', size=5):
-    plt.plot(P.x, P.y, marker=marker, color=color, markersize=size)
+def plot_point(P, marker='o', color='b', size=4):
+    plt.plot(P.x, P.y, marker=marker, color=color, markersize=size, markeredgecolor='k', markeredgewidth=0.1)
     plt.draw()
 
 
