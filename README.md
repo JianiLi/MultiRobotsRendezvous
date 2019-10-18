@@ -1,6 +1,8 @@
 # MultiRobotsRendezvous
 
-Use Tverberg point (Implementation of the paper ["An efficient algorithm for fault-tolerant rendezvous of multi-robot systems with controllable sensing range"](https://ieeexplore.ieee.org/document/7487153)) and centerpoint to achieve fault-tolerant multi-robot consensus.
+This is the implementation of the paper "Resilient Vector Consensus in Multi-Agent Networks Using Centerpoints" (under review of ACC2020).
+
+We also implemented the method proposed in ["An efficient algorithm for fault-tolerant rendezvous of multi-robot systems with controllable sensing range"](https://ieeexplore.ieee.org/document/7487153)) for a comparison with our method.
 
 
 ## Instruction
