@@ -1,6 +1,6 @@
 # MultiRobotsRendezvous
 
-This is the implementation of the paper "Resilient Vector Consensus in Multi-Agent Networks Using Centerpoints" (under review of ACC2020).
+This is the implementation of the paper ["Resilient Vector Consensus in Multi-Agent Networks Using Centerpoints"](https://arxiv.org/pdf/2003.05497.pdf).
 
 We also implemented the method proposed in ["An efficient algorithm for fault-tolerant rendezvous of multi-robot systems with controllable sensing range"](https://ieeexplore.ieee.org/document/7487153)) for a comparison with our method.
 
