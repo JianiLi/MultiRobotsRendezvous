@@ -89,3 +89,17 @@ pip install shapely
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center7.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center13.jpg)
+
+
+## Cite the paper
+```
+@inproceedings{centerpointconcensus_ACC,
+author    = {Mudassir Shabbir and
+             Jiani Li and
+             Waseem Abbas and
+             Xenofon D. Koutsoukos},
+title     = {Resilient Vector Consensus in Multi-Agent Networks Using Centerpoints},
+booktitle = {American Control Conference},
+year = {2020}
+}
+```
