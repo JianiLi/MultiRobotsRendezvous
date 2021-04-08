@@ -10,10 +10,11 @@ We also implemented the method proposed in ["An efficient algorithm for fault-to
 Tested on python 3.7.3
 
 Four executable files:
-- python main.py (general cases)
 - python faultTolerantRendezvous.py
 - python attackToOnePoint.py
 - python resilienceSuperiority.py
+- python dynamicFaults.py
+- python largeNetwork.py
 
 Parameters:
 n: number of robots
