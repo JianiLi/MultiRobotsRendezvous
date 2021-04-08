@@ -1,6 +1,8 @@
 # MultiRobotsRendezvous
 
-Use Tverberg point (Implementation of the paper ["An efficient algorithm for fault-tolerant rendezvous of multi-robot systems with controllable sensing range"](https://ieeexplore.ieee.org/document/7487153)) and centerpoint to achieve fault-tolerant multi-robot consensus.
+This is the implementation of the paper ["Resilient Vector Consensus in Multi-Agent Networks Using Centerpoints"](https://arxiv.org/pdf/2003.05497.pdf).
+
+We also implemented the method proposed in ["An efficient algorithm for fault-tolerant rendezvous of multi-robot systems with controllable sensing range"](https://ieeexplore.ieee.org/document/7487153)) for a comparison with our method.
 
 
 ## Instruction
@@ -87,3 +89,17 @@ pip install shapely
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center0.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center7.jpg)
 ![](https://github.com/JianiLi/MultiRobotsRendezvous/blob/master/figure/resilienceSuperiority/center13.jpg)
+
+
+## Cite the paper
+```
+@inproceedings{centerpointconcensus_ACC,
+author    = {Mudassir Shabbir and
+             Jiani Li and
+             Waseem Abbas and
+             Xenofon D. Koutsoukos},
+title     = {Resilient Vector Consensus in Multi-Agent Networks Using Centerpoints},
+booktitle = {American Control Conference},
+year = {2020}
+}
+```
