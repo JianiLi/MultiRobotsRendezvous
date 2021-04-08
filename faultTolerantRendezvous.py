@@ -47,7 +47,7 @@ position_y_along_time = []
 
 diff_nf_and_nf_approx = []
 
-while t < 56:
+while t < 100:
     stop = True
     diff_nf_and_nf_approx_t = []
 
@@ -60,25 +60,27 @@ while t < 56:
     # plt.yticks([0.3*i for i in range(-5,5, 1)])
     plt.gca().set_aspect('equal', adjustable='box')
     # ax.grid(True)
-    for tic in ax.xaxis.get_major_ticks():
-        tic.tick1On = tic.tick2On = False
-        tic.label1On = tic.label2On = False
-    for tic in ax.yaxis.get_major_ticks():
-        tic.tick1On = tic.tick2On = False
-        tic.label1On = tic.label2On = False
+    # for tic in ax.xaxis.get_major_ticks():
+    #     tic.tick1On = tic.tick2On = False
+    #     tic.label1On = tic.label2On = False
+    # for tic in ax.yaxis.get_major_ticks():
+    #     tic.tick1On = tic.tick2On = False
+    #     tic.label1On = tic.label2On = False
     start, end = ax.get_xlim()
-    ax.xaxis.set_ticks(np.arange(start, end + 0.01, 0.2))
-    ax.yaxis.set_ticks(np.arange(start, end + 0.01, 0.2))
+    # ax.xaxis.set_ticks(np.arange(start, end + 0.01, 0.2))
+    # ax.yaxis.set_ticks(np.arange(start, end + 0.01, 0.2))
 
-    # ax.set_xticks([0, 0.3, 0.4, 1.0, 1.5])
-    ax.set_xticklabels([-1, "", "", "", "", 0, "", "", "", "", 1])
-    ax.set_yticklabels([-1, "", "", "", "", 0, "", "", "", "", 1])
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
     for i in range(0, n_fault_free):
         for neighbor in rob_fault_free[i].neighbors:
             plt.plot([p_fault_free[i].x, p[neighbor].x], [p_fault_free[i].y, p[neighbor].y], linewidth=0.2,
                      color='gray')
     plot_point_set(p_faulty, color='r')  # faulty robots are plotted in red
     plot_point_set(p_fault_free, color='b')  # fault-free robots are plotted in blue
+    plot_point_set([p_fault_free[4],p_fault_free[8]], color='yellow')  # fault-free robots are plotted in blue
     plt.pause(1)
     plt.savefig('./result/faultTolerantRendezvous/%s%d.eps' % (method, t))
     # end = input('Press enter to end the program.')
@@ -98,6 +100,7 @@ while t < 56:
             nf_approx_t = 0
         nf_t = len([p for p in rob_fault_free[i].neighbors if p in range(n - n_faulty, n)])
         diff_nf_and_nf_approx_t.append(nf_approx_t - nf_t)
+
     for i in range(0, n_fault_free):
         p[i] = rob_fault_free[i].getPos()
         stop = stop and rob_fault_free[i].stop
@@ -144,8 +147,8 @@ plt.plot(position_x_along_time)
 plt.draw()
 plt.ylabel("Position (X)", fontsize=24)
 ax = plt.gca()
-ax.xaxis.set_ticks(np.arange(-5, 55, 5))
-ax.set_xticklabels(np.arange(-5, 55, 5))
+# ax.xaxis.set_ticks(np.arange(0, 100, 10))
+# ax.set_xticklabels(np.arange(0, 100, 10))
 plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)
 ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -156,8 +159,8 @@ plt.draw()
 plt.xlabel("Iteration", fontsize=24)
 plt.ylabel("Position (Y)", fontsize=24)
 ax = plt.gca()
-ax.xaxis.set_ticks(np.arange(-5, 55, 5))
-ax.set_xticklabels(np.arange(-5, 55, 5))
+# ax.xaxis.set_ticks(np.arange(0, 100, 10))
+# ax.set_xticklabels(np.arange(0, 100, 10))
 plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)
 ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -167,4 +170,4 @@ plt.savefig('./result/faultTolerantRendezvous/positionChange_%s.eps' % (method))
 #plt.show()
 
 print("Total time used: %.2f s" % (time.time() - start_time))
-end = input('Press enter to end the program.')
+# end = input('Press enter to end the program.')

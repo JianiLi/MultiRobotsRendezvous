@@ -3,7 +3,7 @@ import time
 from matplotlib.ticker import MaxNLocator
 
 from Robot.faultFreeRobot import FaultFreeRobot
-from Robot.stationaryFaultRobot import StationaryFaultyRobot
+from Robot.dynamicFaultyRobot import OsciallateFaultyRobot, MoveAwayFaultyRobot
 from TverbergPoint.TverbergPoint import *
 
 # rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
@@ -37,14 +37,15 @@ rob_fault_free = []
 start_time = time.time()
 
 for i in range(0, n_faulty):
-    rob_faulty.append(StationaryFaultyRobot(p_faulty[i]))
+    rob_faulty.append(OsciallateFaultyRobot(p_faulty[i]))
+    #rob_faulty.append(MoveAwayFaultyRobot(p_faulty[i]))
     p[n_fault_free + i] = p_faulty[i]
 
 for i in range(0, n_fault_free):
     rob_fault_free.append(FaultFreeRobot(p_fault_free[i], sensDist, alpha, velMax, delta, fixNeighbors=fixNeighbor))
     rob_fault_free[i].findNeighbors(p)
 
-#plt.figure(figsize=(2, 2))
+plt.figure(figsize=(2, 2))
 t = 0
 
 position_x_along_time = []
@@ -57,7 +58,7 @@ while True:
     diff_nf_and_nf_approx_t = []
 
     plt.clf()
-    # plt.grid(True, which='major')
+    #plt.grid(True, which='major')
     ax = plt.gca()
     ax.set_xlim(-box, box)
     ax.set_ylim(-box, box)
@@ -78,16 +79,16 @@ while True:
     # ax.set_xticks([0, 0.3, 0.4, 1.0, 1.5])
     ax.set_xticklabels([-1, "", "", "", "", 0, "", "", "", "", 1])
     ax.set_yticklabels([-1, "", "", "", "", 0, "", "", "", "", 1])
-    for i in range(0, n_fault_free):
-        for neighbor in rob_fault_free[i].neighbors:
-            plt.plot([p_fault_free[i].x, p[neighbor].x], [p_fault_free[i].y, p[neighbor].y], linewidth=0.2,
-                     color='gray')
+    # for i in range(0, n_fault_free):
+    #     for neighbor in rob_fault_free[i].neighbors:
+    #         plt.plot([p_fault_free[i].x, p[neighbor].x], [p_fault_free[i].y, p[neighbor].y], linewidth=0.2,
+    #                  color='gray')
 
     plot_point_set(p_fault_free, color='b')  # fault-free robots are plotted in blue
     plot_point_set(p_faulty, color='r')  # faulty robots are plotted in red
 
     plt.pause(1)
-    plt.savefig('./result/largeNetwork/%s%d.eps' % (method, t))
+    plt.savefig('./result/dynamicFaults/%s%d.eps' % (method, t))
     # end = input('Press enter to end the program.')
     t += 1
     print("iteration %d" % t)
@@ -105,6 +106,10 @@ while True:
             nf_approx_t = 0
         nf_t = len([p for p in rob_fault_free[i].neighbors if p in range(n - n_faulty, n)])
         diff_nf_and_nf_approx_t.append(nf_approx_t - nf_t)
+    for i in range(0, n_faulty):
+        rob_faulty[i].updatePos(t)
+        p[n_fault_free+i] = rob_faulty[i].getPos()
+
     for i in range(0, n_fault_free):
         p[i] = rob_fault_free[i].getPos()
         stop = stop and rob_fault_free[i].stop
@@ -129,7 +134,7 @@ while True:
 # plt.yticks(fontsize=15)
 # ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 # plt.tight_layout()
-# plt.savefig('./result/largeNetwork/positionChangeX_%s.eps' % (method))
+# plt.savefig('./result/dynamicFaults/positionChangeX_%s.eps' % (method))
 #
 # #plt.subplot(2, 1, 2)
 # plt.figure(figsize=(5, 5))
@@ -145,7 +150,7 @@ while True:
 # ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 #
 # plt.tight_layout()
-# plt.savefig('./result/largeNetwork/positionChangeY_%s.eps' % (method))
+# plt.savefig('./result/dynamicFaults/positionChangeY_%s.eps' % (method))
 # # plt.show()
 
 plt.figure(figsize=(5, 9))
@@ -173,8 +178,9 @@ plt.yticks(fontsize=15)
 ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
 plt.tight_layout()
-plt.savefig('./result/largeNetwork/positionChange_%s.eps' % (method))
+plt.savefig('./result/dynamicFaults/positionChange_%s.eps' % (method))
 #plt.show()
+
 
 plt.figure(figsize=(5, 5))
 ax = plt.gca()
@@ -202,7 +208,7 @@ plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)
 ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.tight_layout()
-plt.savefig('./result/largeNetwork/diff_nf_%s.eps' % (method))
+plt.savefig('./result/dynamicFaults/diff_nf_%s.eps' % (method))
 # plt.show()
 
 print("Total time used: %.2f s" % (time.time() - start_time))

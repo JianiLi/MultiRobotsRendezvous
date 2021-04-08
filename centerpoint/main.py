@@ -21,7 +21,7 @@ def plotResult(point_set, cp):
 
 if __name__ == '__main__':
     n = 1000  # total number of points
-    plot = False
+    plot = True
     start_time = time.time()
     point_set = random_point_set(n, lower=-100, upper=100)
     cp = Centerpoint(plot=plot)

@@ -44,8 +44,15 @@ class FaultFreeRobot:
 
     def getCenterSafePoint(self):
         centerPoint = Centerpoint()
-        #cp = centerPoint.reduce_then_get_centerpoint(self.neighborsPos)
-        cp = centerPoint.getSafeCenterPoint(self.neighborsPos)
+        try:
+            # cp = centerPoint.getSafeCenterPoint(self.neighborsPos)
+            cp = centerPoint.reduce_then_get_centerpoint(self.neighborsPos)
+            if cp:
+                return cp
+            else:
+                return self.neighborsPos
+        except:
+            return self.neighborsPos
         return cp
 
     def getMedian(self):
